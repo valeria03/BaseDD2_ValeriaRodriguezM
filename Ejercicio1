@@ -1,0 +1,17 @@
+begin
+DBMS_OUTPUT.PUT_LINE("Mi primer programa ");
+end;
+/
+
+programa 2 
+
+declare
+nombre varchar(80);
+edad integer;
+begin
+nombre:="Valeria";
+edad:=24;
+dbms_output.put_line('Hey'||nombre||'Tuedad es'||edad||);
+end;
+/
+
