@@ -1,0 +1,22 @@
+
+Create table empleado (id integer,nombre varchar2(120),sueldo float);
+
+insert into empleado values (4, 'Alonso',9000);
+
+select * from empleado;
+
+SET serveroutput ON;
+DECLARE 
+     cursor cursor_actualizar_emp is select * from empleado for update of sueldo;
+BEGIN 
+FOR rec IN cursor_actualizar_emp LOOP
+IF rec.sueldo > 6000 THEN
+   UPDATE empleado SET sueldo=rec.sueldo +  2000 WHERE CURRENT OF cursor_actualizar_emp;
+ELSE
+   UPDATE empleado SET sueldo=rec.sueldo +  1000 WHERE CURRENT OF cursor_actualizar_emp;
+   
+     END IF;
+  END LOOP;
+END;
+/
+   
