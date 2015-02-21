@@ -1,0 +1,13 @@
+CREATE
+  TABLE libros
+  (
+    pk_book_id       primary key ,
+    isbn             VARCHAR2(13),
+    titulo           VARCHAR2(200),
+    resumen          VARCHAR2(2000),
+    autor            VARCHAR2(200),
+    fecha_publiccion DATE,
+    num_pag          NUMBER
+  );
+
+drop table libros;
