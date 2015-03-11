@@ -1,0 +1,77 @@
+DECLARE
+  inicio INTEGER;
+  valor  INTEGER;
+BEGIN
+  inicio := 1500;
+  FOR i IN 1..300
+  LOOP
+  DBMS_RANDOM.String('l',8);
+  guardar_trabajador (i,i,nombre,puesto);
+  guardar_honorarios(i,i,inicio,NULL,NULL,NULL);
+  inicio := inicio + 100;
+  END LOOP;
+END;
+/
+
+Crear un procedimiento almacenado para actualizar e imprimir un repote con todos los datos de 
+  subtotal para todos los registros y aplicando las siguientes formulas:
+  
+  
+iva := subtotal*0.16;
+ret_iva := iva/3;
+isr := subtotal*0.10
+total_pagar := subtotal+ret_iva-iva-isr;
+  
+ (JOIN) REPORTE: Nombre|Puesto|total_pagar
+ 
+ 
+CREATE OR REPLACE
+PROCEDURE yo
+AS
+  my_iva        INTEGER;
+  my_retiva     INTEGER;
+  my_isr        INTEGER;
+  my_totalpagar INTEGER;
+  
+  
+CURSOR cur_ex
+  IS
+  SELECT * FROM honorarios FOR UPDATE;
+  
+BEGIN
+  FOR xxx IN cur_ex
+  LOOP
+  my_iva        := xxx.subtotal * 0.16;
+  my_retiva     := xxx.iva      /3;
+  my_isr        := xxx.subtotal * 0.10;
+  my_totalpagar := xxx.subtotal + xxx.ret_iva - xxx.iva - xxx.isr;
+  
+  UPDATE
+  honorario SET
+  iva         = my_iva,
+  ret_iva     = my_retiva,
+ isr         = my_isr,
+total_pagar = my_totalpagar
+ WHERE CURRENT OF cur_ex;
+  END LOOP;
+  END;
+  /
+
+
+my_iva integer;
+my_ret_iva integer;
+my_isr integer;
+my_total_pagar integer;
+cursor cur_ex IS select *from honorarios for update;
+
+BEGIN
+//FORMULAS
+ for xxx IN cur_ex LOOP
+ my_iva:=xxx.subtotal*0.16;
+ my_ret_iva:=iva/3;
+ my_isr:=xxx.subtotal*0.10;
+ my_total_pagar:=xxx.subtotal+ret_iva-iva-isr;
+ UPDATE honorarios set iva=my_iva,ret_iva=my_ret_iva,isr=my_isr,total_pagar=my_total_pagar  where current of cur_ex;
+ END LOOP;
+ END;
+ /
