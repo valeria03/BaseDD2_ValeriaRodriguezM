@@ -1,0 +1,38 @@
+
+CREATE
+  TABLE Productos 
+  (
+  tipo_producto   INTEGER,
+  color          VARCHAR2(200),
+  precio         VARCHAR2(2000),
+  talla          VARCHAR2(200),
+  CONSTRAINT PK_ID_PRODUCTO PRIMARY KEY (ID_PRODUCTO),
+
+  );
+CREATE
+  TABLE tipo
+  (
+    id_tipo        NUMBRE,
+    tipos         VARCHAR2  (100),
+    ropa_hombre   VARCHAR2 (100),
+    ropa_mujer    VARCHAR2(100),
+    CONSTRAINT PK_Id_tipo PRIMARY KEY (ID_tipo)
+   
+    CONSTRAINT FK_ID_producto FOREIGN KEY (ID_producto) REFERENCES
+    EMPLEADO_VENTAS (ID_producto)
+
+  );
+  
+  CREATE
+  TABLE TALLA
+  (
+    id_talla       NUMBRE,
+    talla        VARCHAR2  (100),
+    CONSTRAINT PK_Id_talla PRIMARY KEY (ID_talla)
+   
+    CONSTRAINT FK_ID_producto FOREIGN KEY (ID_producto) REFERENCES
+    EMPLEADO_VENTAS (ID_producto)
+
+  );
+  
+  
