@@ -1,0 +1,33 @@
+
+
+CREATE TABLE SITIO_XXX (ID_xxx integer,edad integer);
+CREATE TABLE PEQUES (ID_xxx integer,edad integer);
+CREATE TABLE ADULTOS (ID_xxx integer,edad integer);
+
+CREATE OR  REPLACE TRIGGER diaparador_1 BEFORE insert  ON sitio_xxx FOR   each row
+
+BEGIN 
+IF :NEW.edad < 18 THEN 
+raise_application_error(-20001, 'LO SIENTO ERES UN PEQUEÑO PERVERTIVO');
+INSERT INTO PEQUES SET EDAD ;
+
+ELSE  :NEW.edad > 18 THEN 
+raise_application_error(-20001, 'PUEDES ACCESAR');
+INSERT INTO ADULTOS SET EDAD;
+
+END IF;
+
+END ELSE; 
+END;
+/
+
+
+
+
+
+insert into usuario_xxx values(1,20);
+
+
+
+
+SELECT * FROM usuario_xxx;
