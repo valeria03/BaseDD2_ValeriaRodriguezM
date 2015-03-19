@@ -1,0 +1,26 @@
+
+--Disparadores before 
+
+
+CREATE TABLE USUARIO_XXX (ID_usuario integer,edad integer);
+
+CREATE OR  REPLACE TRIGGER diaparador_xxx BEFORE insert  ON usuario_xxx FOR   each row
+
+BEGIN 
+IF :NEW.edad < 18 THEN 
+raise_application_error(-20001, 'LO SIENTO ERES UN PEQUEÑO PERVERTIVO');
+END IF;
+
+END;
+/
+
+
+
+
+
+insert into usuario_xxx values(1,20);
+
+
+
+
+SELECT * FROM usuario_xxx;
